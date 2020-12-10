@@ -13,7 +13,7 @@ function App() {
     //Get the current day of the month.
     let currentDate = today.getDate();
 
-    //Work out the year that the next Christmas day will occur on.
+    //the year that the next newyear day will occur.
     let nextYear = today.getFullYear();
     if (currentMonth === 12 && currentDate === 31) {
       //Christmas Day has already passed.
@@ -22,16 +22,19 @@ function App() {
 
     let nextDate = nextYear + "-12-31T00:00:00.000Z";
     let newDay = new Date(nextDate);
+
+    //setting midnight time
     let newYearDay = new Date(newDay.setHours(0, 0, 0, 0));
 
     //Get the difference in seconds between the two days.
     let diffSeconds = Math.ceil(newYearDay.getTime() - today.getTime());
 
+    //object for the remaining time
     let timeLeft = {};
 
-    //Don't calculate the time left if it is NewYear day.
+    //calculate the time left if not a  NewYear day.
     if (currentMonth !== 12 || (currentMonth === 12 && currentDate <= 31)) {
-      //Convert these seconds into days, hours, minutes, seconds.
+      //Convert milliseconds into days, hours, minutes, seconds.
       let days = Math.ceil(diffSeconds / (24 * 60 * 60 * 1000));
       let daysms = diffSeconds % (24 * 60 * 60 * 1000);
       let hours = Math.floor(daysms / (60 * 60 * 1000));
@@ -40,7 +43,7 @@ function App() {
       let minutesms = diffSeconds % (60 * 1000);
       let sec = Math.ceil(minutesms / 1000);
 
-      //save in the time left object
+      //save in the timeLeft object
       timeLeft = {
         days: days,
         hours: hours,
@@ -55,7 +58,7 @@ function App() {
 
   useEffect(() => {
     let t = setTimeout(
-      setleftTime((k) => calculateCountdown()),
+      setleftTime((t) => calculateCountdown()),
       1000
     );
 
