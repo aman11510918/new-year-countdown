@@ -69,7 +69,7 @@ function App() {
   });
   return (
     <div className="App">
-      <h2>Time left until New Year </h2>
+      <h2>Time left for New Year </h2>
       <h1>
         {leftTime.days} days : {leftTime.hours} hours : {leftTime.minutes}{" "}
         minutes : {leftTime.seconds} seconds
